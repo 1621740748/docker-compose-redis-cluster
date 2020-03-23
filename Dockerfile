@@ -2,15 +2,12 @@ FROM redis:3.2
 
 MAINTAINER Johan Andersson <Grokzen@gmail.com>
 
-cat <<EOF >/etc/apt/sources.list
-deb http://mirrors.aliyun.com/debian wheezy main contrib non-free
-deb-src http://mirrors.aliyun.com/debian wheezy main contrib non-free
-deb http://mirrors.aliyun.com/debian wheezy-updates main contrib non-free
-deb-src http://mirrors.aliyun.com/debian wheezy-updates main contrib non-free
-deb http://mirrors.aliyun.com/debian-security wheezy/updates main contrib non-free
-deb-src http://mirrors.aliyun.com/debian-security wheezy/updates main contrib non-free
-
-EOF
+RUN echo "deb http://mirrors.aliyun.com/debian wheezy main contrib non-free" > /etc/apt/sources.list && \
+    echo "deb-src http://mirrors.aliyun.com/debian wheezy main contrib non-free" >> /etc/apt/sources.list  && \
+    echo "deb http://mirrors.aliyun.com/debian wheezy-updates main contrib non-free" >> /etc/apt/sources.list && \
+    echo "deb-src http://mirrors.aliyun.com/debian wheezy-updates main contrib non-free" >> /etc/apt/sources.list && \
+    echo "deb http://mirrors.aliyun.com/debian-security wheezy/updates main contrib non-free" >> /etc/apt/sources.list && \
+    echo "deb-src http://mirrors.aliyun.com/debian-security wheezy/updates main contrib non-free" >> /etc/apt/sources.list
 
 # Some Environment Variables
 ENV HOME /root
