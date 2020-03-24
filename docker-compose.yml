@@ -30,6 +30,36 @@ services:
     networks:
       app_net:
         ipv4_address: 173.17.0.4
+  redis4:
+    image: redis:3
+    ports:
+      - "7003:7003"
+    volumes:
+      - ./docker-data/redis-cluster4.tmpl:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      app_net:
+        ipv4_address: 173.17.0.5
+  redis5:
+    image: redis:3
+    ports:
+      - "7004:7004"
+    volumes:
+      - ./docker-data/redis-cluster5.tmpl:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      app_net:
+        ipv4_address: 173.17.0.6
+  redis6:
+    image: redis:3
+    ports:
+      - "7005:7005"
+    volumes:
+      - ./docker-data/redis-cluster6.tmpl:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      app_net:
+        ipv4_address: 173.17.0.7
   redis-cluster:
     tty: true
     build:
@@ -41,9 +71,12 @@ services:
       - redis1
       - redis2
       - redis3
+      - redis4
+      - redis5
+      - redis6
     networks:
       app_net:
-        ipv4_address: 173.17.0.5
+        ipv4_address: 173.17.0.8
 networks:
   app_net:
     driver: bridge
